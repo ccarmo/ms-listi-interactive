@@ -1,6 +1,6 @@
 
 package com.dev.clibank.domain.vo;
-class Address {
+public class Address {
 
         private final String street;
         private final String country;
