@@ -1,8 +1,10 @@
 package com.dev.clibank.infra.file;
 
 
+import org.junit.jupiter.api.Test;
+
 import com.dev.clibank.domain.entities.User;
-import org.junit.Test;
+
 
 public class UserFileRepositoryTest {
 
