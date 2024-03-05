@@ -15,6 +15,6 @@ public class GetCard {
     }
 
     public void getCard(Card card) {
-
+        cardRepository.getNumberCard(card.getNumberCard());
     }
 }

@@ -3,22 +3,21 @@ package com.dev.clibank.infra.file;
 import com.dev.clibank.domain.entities.Card;
 import com.dev.clibank.domain.repository.CardRepository;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.util.List;
+import java.util.Optional;
 
 public class CardFileRepository implements CardRepository{
 
+    private static final String CARD_FILE_NAME = "card.json";
     @Override
-    public void get(Card card) throws FileNotFoundException {
-
-
-    }
-
-    @Override
-    public void getNumberCard(String numberCard) {
-
+    public Optional<Card> getNumberCard(String numberCard) {
+        List<Card> cardList = FileJsonManager.getFileListJson(CARD_FILE_NAME,Card.class);
+        for (Card card : cardList) {
+            if (card.getNumberCard() == numberCard) {
+                return  Optional.of(card);
+            }
+        }
+        return Optional.empty();
     }
 
 }
