@@ -24,7 +24,6 @@ public class User implements Serializable {
     public String getName() {
         return this.name;
     }
-
     public String getId() {
         return this.id;
     }
