@@ -31,6 +31,9 @@ jobs:
         with:
           java-version: '11'
 
+      - name: Ls
+        run: 
+          ls -la
       # Runs a set of commands using the runners shell
       - name: Unit Tests
         run: mvn -B clean test
