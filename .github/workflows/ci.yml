@@ -32,7 +32,8 @@ jobs:
           java-version: '11'
 
       - name: Ls
-        run: 
+        run:
+          cd /home/runner/work/clibank/clibank
           ls -la
       # Runs a set of commands using the runners shell
       - name: Unit Tests
