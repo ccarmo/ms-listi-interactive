@@ -16,6 +16,8 @@ public class FileJsonManager {
     
     private final static Gson gson = new Gson();
 
+    private final static String PATH_DB = "db/";
+
     protected  static <T> void updatedFileJson(String nameFileJson, T objectEntities, Class<T> classEntitie) {
        List<T> listObjects = getFileListJson(nameFileJson, classEntitie);
        listObjects.add(objectEntities);
@@ -27,7 +29,8 @@ public class FileJsonManager {
         try {
             
             String stringJson = gson.toJson(listObjects);
-            FileWriter fileWriter = new FileWriter(nameFileJson);
+            String concatPath = PATH_DB + nameFileJson;
+            FileWriter fileWriter = new FileWriter(concatPath);
             fileWriter.write(stringJson);
             fileWriter.close();
             System.out.println("Success saved file!");
@@ -53,7 +56,8 @@ public class FileJsonManager {
 
     public static <T> List<T> getFileListJson(String nameFileJson, Class<T> classEntitie) {
         try {
-            BufferedReader fileJson = new BufferedReader(new FileReader(nameFileJson));
+            String concatPath = PATH_DB + nameFileJson;
+            BufferedReader fileJson = new BufferedReader(new FileReader(concatPath));
             Type jsonLisType = TypeToken.getParameterized(ArrayList.class,classEntitie).getType();
             List<T> listJson = gson.fromJson(fileJson, jsonLisType);
             return listJson;

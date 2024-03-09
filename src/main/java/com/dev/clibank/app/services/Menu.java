@@ -1,8 +1,13 @@
 package com.dev.clibank.app.services;
 
 import com.dev.clibank.app.usecases.GetBalance;
+import com.dev.clibank.app.usecases.impl.GetAccountImpl;
 import com.dev.clibank.app.usecases.impl.GetBalanceImpl;
+import com.dev.clibank.app.usecases.impl.GetUserImpl;
+import com.dev.clibank.domain.entities.Account;
+import com.dev.clibank.domain.entities.User;
 import com.dev.clibank.infra.file.AccountFileRepository;
+import com.dev.clibank.infra.file.UserFileRepository;
 
 import java.math.BigDecimal;
 import java.util.Scanner;
@@ -12,16 +17,20 @@ public class Menu {
     private static Integer op = 1;
     private static final boolean flag = true;
 
-    AccountService accountService = new AccountService(new GetBalanceImpl(new AccountFileRepository()));
+    AccountService accountService = new AccountService(new GetAccountImpl(new AccountFileRepository()));
+    UserService userService = new UserService(new GetUserImpl(new UserFileRepository()));
 
     public void printMenu() {
         String accountNumber = "07105";
-        String idUser        = "ae5e9df4-910e-4f2b-878b-bfa5fc8e1741";
+        Account account = accountService.getAccount(accountNumber).get();
+        User user = userService.getUserService(account.getIdUser()).get();
+
 
         Scanner leia = new Scanner(System.in);
         do {
 
             System.out.println("                                                                                        \n-----------------------------------------");
+            System.out.println("                                                                                        |             BEM VINDO   " + user.getName() + "  |");
             System.out.println("                                                                                        |             BANCO SIMPLIFICADO         |");
             System.out.println("                                                                                        -----------------------------------------");
             System.out.println("                                                                                        | Opções:                               |");
@@ -38,7 +47,7 @@ public class Menu {
             switch (op) {
                 case 1:
 
-                    BigDecimal balance = accountService.getBalance(accountNumber);
+                    BigDecimal balance = account.getBalance();
                     System.out.println("Saldo total: " + balance);
 
                     break;
