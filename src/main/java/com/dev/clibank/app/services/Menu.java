@@ -25,9 +25,11 @@ public class Menu {
             System.out.println("                                                                                        |             BANCO SIMPLIFICADO         |");
             System.out.println("                                                                                        -----------------------------------------");
             System.out.println("                                                                                        | Opções:                               |");
-            System.out.println("                                                                                        |    1. Consultar saldo                 |");
-            System.out.println("                                                                                        |    2. Depositar                       |");
-            System.out.println("                                                                                        |    3. Sacar                           |");
+            System.out.println("                                                                                        |    1. Consulta Saldo                  |");
+            System.out.println("                                                                                        |    2. Extrato                         |");
+            System.out.println("                                                                                        |    3. Pix                             |");
+            System.out.println("                                                                                        |    4. Pagamentos                      |");
+            System.out.println("                                                                                        |    5. Cartoẽs                         |");
             System.out.println("                                                                                        |    99. Sair                           |");
             System.out.println("                                                                                         -----------------------------------------");
             System.out.print("Opção: ");
