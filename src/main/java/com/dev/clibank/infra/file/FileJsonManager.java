@@ -6,7 +6,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 
 import com.google.gson.Gson;
@@ -18,11 +21,36 @@ public class FileJsonManager {
 
     private final static String PATH_DB = "db/";
 
-    protected  static <T> void updatedFileJson(String nameFileJson, T objectEntities, Class<T> classEntitie) {
-       List<T> listObjects = getFileListJson(nameFileJson, classEntitie);
-       listObjects.add(objectEntities);
-       saveFileJson(listObjects, nameFileJson);
+    protected static void clearFileJson(String nameFileJson) {
+
+        try {
+            String concatPath = PATH_DB + nameFileJson;
+            FileWriter fileWriter = new FileWriter(concatPath);
+            fileWriter.write("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
+
+    protected  static <T> void updatedFileJson(String nameFileJson, T newObject, T oldObject, Predicate<T> predicate, Class<T> classEntitie) {
+        List<T> listObjects = getFileListJson(nameFileJson, classEntitie);
+        Optional<T> firstObject = listObjects.stream()
+                .filter(predicate)
+                .findFirst();
+        listObjects.remove(firstObject.get());
+        clearFileJson(nameFileJson);
+        listObjects.add(newObject);
+        saveFileJson(listObjects, nameFileJson);
+    }
+
+    protected  static <T> void updatedFileJson(String nameFileJson, T objectEntities, Class<T> classEntitie) {
+        List<T> listObjects = getFileListJson(nameFileJson, classEntitie);
+        listObjects.add(objectEntities);
+        saveFileJson(listObjects, nameFileJson);
+    }
+
 
     protected static <T> void saveFileJson(List<T> listObjects, String nameFileJson) {
 

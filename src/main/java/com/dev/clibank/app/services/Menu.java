@@ -4,12 +4,16 @@ import com.dev.clibank.app.usecases.GetBalance;
 import com.dev.clibank.app.usecases.impl.GetAccountImpl;
 import com.dev.clibank.app.usecases.impl.GetBalanceImpl;
 import com.dev.clibank.app.usecases.impl.GetUserImpl;
+import com.dev.clibank.app.usecases.impl.SendPaymentImpl;
 import com.dev.clibank.domain.entities.Account;
+import com.dev.clibank.domain.entities.Payment;
 import com.dev.clibank.domain.entities.User;
 import com.dev.clibank.infra.file.AccountFileRepository;
+import com.dev.clibank.infra.file.StatementFileRepository;
 import com.dev.clibank.infra.file.UserFileRepository;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Menu {
@@ -46,12 +50,19 @@ public class Menu {
 
             switch (op) {
                 case 1:
-
-                    BigDecimal balance = account.getBalance();
+                    AccountService accountService = new AccountService(new GetAccountImpl(new AccountFileRepository()));
+                    BigDecimal balance = accountService.getAccount(accountNumber).get().getBalance();
                     System.out.println("Saldo total: " + balance);
 
                     break;
-
+                case 2:
+                    System.out.println("Extrato");
+                case 3:
+                    System.out.println("Pix");
+                case 4:
+                    PaymentService paymentService = new PaymentService(new SendPaymentImpl(new StatementFileRepository()));
+                    Payment payment = new Payment(BigDecimal.valueOf(1),accountNumber,"PIX", LocalDate.now());
+                    paymentService.sendPayment(payment);
                 default:
                     System.out.println(" ");
 
