@@ -16,4 +16,8 @@ public class StatementFileRepository implements StatementRepository {
         FileJsonManager.updatedFileJson(STATEMENT_FILE_NAME,statement, Statement.class);
 
     }
+
+    public List<Statement> getStatementAccount(String idAccount) {
+        return FileJsonManager.getFileListJson(STATEMENT_FILE_NAME, Statement.class);
+    }
 }

@@ -1,7 +1,7 @@
 package com.dev.clibank.domain.entities;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 
@@ -14,11 +14,11 @@ public class Payment {
 
     private String typePayment;
 
-    private LocalDate datePayment;
+    private LocalDateTime datePayment;
 
 
 
-    public Payment(BigDecimal value, String idAccount, String typePayment, LocalDate datePayment) {
+    public Payment(BigDecimal value, String idAccount, String typePayment, LocalDateTime datePayment) {
         this.id    = UUID.randomUUID().toString();
         this.value = value;
         this.idAccount = idAccount;
@@ -59,11 +59,11 @@ public class Payment {
         this.typePayment = typePayment;
     }
 
-    public LocalDate getDatePayment() {
+    public LocalDateTime getDatePayment() {
         return datePayment;
     }
 
-    public void setDatePayment(LocalDate datePayment) {
+    public void setDatePayment(LocalDateTime datePayment) {
         this.datePayment = datePayment;
     }
 }

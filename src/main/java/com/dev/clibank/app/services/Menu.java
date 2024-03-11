@@ -1,12 +1,10 @@
 package com.dev.clibank.app.services;
 
 import com.dev.clibank.app.usecases.GetBalance;
-import com.dev.clibank.app.usecases.impl.GetAccountImpl;
-import com.dev.clibank.app.usecases.impl.GetBalanceImpl;
-import com.dev.clibank.app.usecases.impl.GetUserImpl;
-import com.dev.clibank.app.usecases.impl.SendPaymentImpl;
+import com.dev.clibank.app.usecases.impl.*;
 import com.dev.clibank.domain.entities.Account;
 import com.dev.clibank.domain.entities.Payment;
+import com.dev.clibank.domain.entities.Statement;
 import com.dev.clibank.domain.entities.User;
 import com.dev.clibank.infra.file.AccountFileRepository;
 import com.dev.clibank.infra.file.StatementFileRepository;
@@ -14,6 +12,8 @@ import com.dev.clibank.infra.file.UserFileRepository;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -56,13 +56,22 @@ public class Menu {
 
                     break;
                 case 2:
-                    System.out.println("Extrato");
+                    StatementService statementService = new StatementService(new GetStatementImpl(new StatementFileRepository()));
+                    List<Statement> statementList = statementService.getListStatement(account);
+                    System.out.println("\tExtrato: \n");
+                    statementList.stream().forEach(statement -> {
+                        System.out.println("\tValor: R$" + statement.getPayment().getValue() + "      | \tData: " + statement.getPayment().getDatePayment() + "\n");
+                    });
+                    break;
+
                 case 3:
                     System.out.println("Pix");
+                    break;
                 case 4:
                     PaymentService paymentService = new PaymentService(new SendPaymentImpl(new StatementFileRepository()));
-                    Payment payment = new Payment(BigDecimal.valueOf(1),accountNumber,"PIX", LocalDate.now());
+                    Payment payment = new Payment(BigDecimal.valueOf(1),accountNumber,"PIX", LocalDateTime.now());
                     paymentService.sendPayment(payment);
+                    break;
                 default:
                     System.out.println(" ");
 
