@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Predicate;
@@ -71,16 +70,6 @@ public class FileJsonManager {
 
     }
 
-    public static <T> T getFileJson(BufferedReader fileJson, Class<T> classEntitie) {
-        try {
-            return gson.fromJson(fileJson, classEntitie);
-        } catch (Exception e) {
-            System.out.println("Error saved file" + e.getMessage());
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-        
-    }
 
     public static <T> List<T> getFileListJson(String nameFileJson, Class<T> classEntitie) {
         try {
