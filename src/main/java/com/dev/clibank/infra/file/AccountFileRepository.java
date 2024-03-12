@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 public class AccountFileRepository implements AccountRepository {
 
@@ -23,5 +24,11 @@ public class AccountFileRepository implements AccountRepository {
             }
         }
         return Optional.empty();
+    }
+
+    @Override
+    public void updatedAccount(Account updatedAccountObject) {
+        Optional<Account> oldAccountObject = getAccountNumber(updatedAccountObject.getAccountNumber());
+        FileJsonManager.updatedFileJson(ACCOUNT_FILE_NAME, updatedAccountObject, oldAccountObject.get(), object -> oldAccountObject.get().getAccountNumber().equals(oldAccountObject.get().getAccountNumber()),Account.class);
     }
 }

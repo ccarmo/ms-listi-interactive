@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 
 
 import com.google.gson.Gson;
@@ -16,18 +18,46 @@ public class FileJsonManager {
     
     private final static Gson gson = new Gson();
 
-    protected  static <T> void updatedFileJson(String nameFileJson, T objectEntities, Class<T> classEntitie) {
-       List<T> listObjects = getFileListJson(nameFileJson, classEntitie);
-       listObjects.add(objectEntities);
-       saveFileJson(listObjects, nameFileJson);
+    private final static String PATH_DB = "db/";
+
+    protected static void clearFileJson(String nameFileJson) {
+
+        try {
+            String concatPath = PATH_DB + nameFileJson;
+            FileWriter fileWriter = new FileWriter(concatPath);
+            fileWriter.write("");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
+
+    protected  static <T> void updatedFileJson(String nameFileJson, T newObject, T oldObject, Predicate<T> predicate, Class<T> classEntitie) {
+        List<T> listObjects = getFileListJson(nameFileJson, classEntitie);
+        Optional<T> firstObject = listObjects.stream()
+                .filter(predicate)
+                .findFirst();
+        listObjects.remove(firstObject.get());
+        clearFileJson(nameFileJson);
+        listObjects.add(newObject);
+        saveFileJson(listObjects, nameFileJson);
+    }
+
+    protected  static <T> void updatedFileJson(String nameFileJson, T objectEntities, Class<T> classEntitie) {
+        List<T> listObjects = getFileListJson(nameFileJson, classEntitie);
+        listObjects.add(objectEntities);
+        saveFileJson(listObjects, nameFileJson);
+    }
+
 
     protected static <T> void saveFileJson(List<T> listObjects, String nameFileJson) {
 
         try {
             
             String stringJson = gson.toJson(listObjects);
-            FileWriter fileWriter = new FileWriter(nameFileJson);
+            String concatPath = PATH_DB + nameFileJson;
+            FileWriter fileWriter = new FileWriter(concatPath);
             fileWriter.write(stringJson);
             fileWriter.close();
             System.out.println("Success saved file!");
@@ -40,20 +70,11 @@ public class FileJsonManager {
 
     }
 
-    public static <T> T getFileJson(BufferedReader fileJson, Class<T> classEntitie) {
-        try {
-            return gson.fromJson(fileJson, classEntitie);
-        } catch (Exception e) {
-            System.out.println("Error saved file" + e.getMessage());
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
-        
-    }
 
     public static <T> List<T> getFileListJson(String nameFileJson, Class<T> classEntitie) {
         try {
-            BufferedReader fileJson = new BufferedReader(new FileReader(nameFileJson));
+            String concatPath = PATH_DB + nameFileJson;
+            BufferedReader fileJson = new BufferedReader(new FileReader(concatPath));
             Type jsonLisType = TypeToken.getParameterized(ArrayList.class,classEntitie).getType();
             List<T> listJson = gson.fromJson(fileJson, jsonLisType);
             return listJson;
