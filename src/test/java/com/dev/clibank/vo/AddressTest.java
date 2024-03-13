@@ -1,17 +1,64 @@
 package com.dev.clibank.vo;
 
 
+import com.dev.clibank.exceptions.AddressNotValidException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.dev.clibank.domain.vo.Address;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 
 public class AddressTest {
 
     @Test
-    public void addressObjectIsNotNull() {
-        Address address = new Address("Rua Gomes de Carvalho", "Brasil", "999");
-        Assertions.assertNotNull(address);
+    public void testValidAddress() {
+        // Arrange
+        String street = "Main St";
+        String country = "USA";
+        String streetNumber = "123";
+
+        // Act
+        Address address = new Address(street, country, streetNumber);
+
+        // Assert
+        assertNotNull(address);
+        assertEquals(street, address.getStreet());
+        assertEquals(country, address.getCountry());
+        assertEquals(streetNumber, address.getStreetNumber());
+    }
+
+    @Test
+    public void testInvalidStreetNumber() {
+        // Arrange
+        String street = "MainSt";
+        String country = "USA";
+        String streetNumber = "abc";
+
+        // Act & Assert
+        assertThrows(AddressNotValidException.class, () -> new Address(street, country, streetNumber));
+    }
+
+    @Test
+    public void testInvalidStreet() {
+        // Arrange
+        String street = "123"; // Invalid street containing numbers
+        String country = "USA";
+        String streetNumber = "123";
+
+        // Act & Assert
+        assertThrows(AddressNotValidException.class, () -> new Address(street, country, streetNumber));
+    }
+
+    @Test
+    public void testInvalidCountry() {
+        // Arrange
+        String street = "Main St";
+        String country = "123"; // Invalid country containing numbers
+        String streetNumber = "123";
+
+        // Act & Assert
+        assertThrows(AddressNotValidException.class, () -> new Address(street, country, streetNumber));
     }
 }

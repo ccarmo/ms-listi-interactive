@@ -9,28 +9,15 @@ import java.util.UUID;
 
 public class Account {
 
+    private String idAccount;
     private String idUser;
-    private String id;
 
     private String accountNumber;
 
     private BigDecimal balance;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Account account = (Account) o;
-        return Objects.equals(idUser, account.idUser) && Objects.equals(id, account.id) && Objects.equals(accountNumber, account.accountNumber) && Objects.equals(balance, account.balance);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(idUser, id, accountNumber, balance);
-    }
-
     public Account(String accountNumber, BigDecimal balance, String idUser) {
-        this.id   = UUID.randomUUID().toString();
+        this.idAccount   = UUID.randomUUID().toString();
         this.idUser = idUser;
         this.accountNumber = accountNumber;
         this.balance = balance;
@@ -39,20 +26,12 @@ public class Account {
     public String getIdUser() {
         return this.idUser;
     }
-    public String getId() {
-        return this.id;
+    public String getIdAccount() {
+        return this.idAccount;
     }
 
     public BigDecimal getBalance() {
         return this.balance;
-    }
-
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
-    }
-
-    public void setId(String id) {
-        this.id = id;
     }
 
     public void setAccountNumber(String accountNumber) {
@@ -67,6 +46,26 @@ public class Account {
         return this.accountNumber;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return Objects.equals(idAccount, account.idAccount) && Objects.equals(idUser, account.idUser) && Objects.equals(accountNumber, account.accountNumber) && Objects.equals(balance, account.balance);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(idAccount, idUser, accountNumber, balance);
+    }
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "idAccount='" + idAccount + '\'' +
+                ", idUser='" + idUser + '\'' +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", balance=" + balance +
+                '}';
+    }
 }
