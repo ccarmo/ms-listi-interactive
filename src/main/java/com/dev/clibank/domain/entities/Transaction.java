@@ -14,16 +14,54 @@ public class Transaction {
 
     private String typeTransaction;
 
-    private LocalDateTime datePayment;
+    private LocalDateTime dateTransaction;
 
 
 
-    public Transaction(BigDecimal value, String idAccount, String typeTransaction, LocalDateTime datePayment) {
+    public Transaction(Builder transactionBuilder) {
         this.idTransaction    = UUID.randomUUID().toString();
-        this.value            = value;
-        this.idAccount        = idAccount;
-        this.typeTransaction  = typeTransaction;
-        this.datePayment      = datePayment;
+        this.value            = transactionBuilder.value;
+        this.idAccount        = transactionBuilder.idAccount;
+        this.typeTransaction  = transactionBuilder.typeTransaction;
+        this.dateTransaction  = LocalDateTime.now();
+
+    }
+
+    public static class Builder {
+
+        private BigDecimal value;
+
+        private String idAccount;
+
+        private String typeTransaction;
+
+
+
+        public Builder() {
+
+
+
+        }
+
+        public Builder value(BigDecimal value) {
+            this.value = value;
+            return this;
+        }
+
+        public Builder idAccount(String idAccount) {
+            this.idAccount = idAccount;
+            return this;
+        }
+
+        public Builder typeTransaction(String typeTransaction) {
+            this.typeTransaction = typeTransaction;
+            return this;
+        }
+
+
+        public Transaction create() {
+            return new Transaction(this);
+        }
 
     }
 
@@ -47,15 +85,10 @@ public class Transaction {
         return typeTransaction;
     }
 
+    public String getDateTransaction() {return this.getDateTransaction();}
+
     public void setTypeTransaction(String typeTransaction) {
         this.typeTransaction = typeTransaction;
     }
 
-    public LocalDateTime getDatePayment() {
-        return datePayment;
-    }
-
-    public void setDatePayment(LocalDateTime datePayment) {
-        this.datePayment = datePayment;
-    }
 }

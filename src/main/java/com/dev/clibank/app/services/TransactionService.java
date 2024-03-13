@@ -11,8 +11,8 @@ public class TransactionService {
         this.startTransactionService = startTransactionService;
     }
 
-    public void sendPayment(Transaction transaction) {
-        this.startTransactionService.sendPayment(transaction);
+    public void createTransaction(Transaction transaction) {
+        this.startTransactionService.createTransaction(transaction);
 
     }
 }

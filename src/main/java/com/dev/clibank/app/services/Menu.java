@@ -26,17 +26,14 @@ public class Menu {
         String[] campos = {"Conta", "Senha"};
         Scanner scanner = new Scanner(System.in);
 
-        List<String> valuesLogin = new ArrayList<>();
+
 
         System.out.println("\n");
         System.out.println("\n");
         System.out.print("                                           \tConta: ");
         String value = scanner.nextLine();
-        valuesLogin.add(value);
-        System.out.print("                                           \tSenha: ");
-        valuesLogin.add(value);
 
-        String accountNumber = valuesLogin.get(0);
+        String accountNumber = value;
         Account account = accountService.getAccount(accountNumber).get();
         User user = userService.getUserService(account.getIdUser()).get();
 
@@ -59,7 +56,7 @@ public class Menu {
                     List<Statement> statementList = statementService.getListStatement(account);
                     System.out.println("\tExtrato: \n");
                     statementList.stream().forEach(statement -> {
-                        System.out.println("\tValor: R$" + statement.getPayment().getValue() + "      | \tData: " + statement.getPayment().getDatePayment() + "\n");
+                        System.out.println("\tValor: R$" + statement.getPayment().getValue() + "      | \tData: " + statement.getPayment().getDateTransaction()+ "\n");
                     });
                     printSpaceLines();
                     break;
@@ -69,8 +66,13 @@ public class Menu {
                     break;
                 case 4:
                     TransactionService transactionService = new TransactionService(new StartTransactionImpl(new StatementFileRepository()));
-                    Transaction transaction = new Transaction(BigDecimal.valueOf(1),accountNumber,"PIX", LocalDateTime.now());
-                    transactionService.sendPayment(transaction);
+
+                    Transaction transaction =   new Transaction.Builder()
+                                                .typeTransaction("CREDIT")
+                                                .value(BigDecimal.valueOf(1))
+                                                .idAccount(accountNumber)
+                                                .create();
+                    transactionService.createTransaction(transaction);
                     printSpaceLines();
                     break;
                 default:

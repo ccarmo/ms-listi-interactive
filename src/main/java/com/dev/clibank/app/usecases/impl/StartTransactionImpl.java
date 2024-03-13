@@ -20,7 +20,7 @@ public class StartTransactionImpl implements StartTransaction {
     }
 
     @Override
-    public void sendPayment(Transaction transaction) {
+    public void createTransaction(Transaction transaction) {
         AccountRepository accountRepository = new AccountFileRepository();
         Optional<Account> account = accountRepository.getAccountNumber(transaction.getIdAccount());
         BigDecimal actualBalanceAccount = account.get().getBalance();
