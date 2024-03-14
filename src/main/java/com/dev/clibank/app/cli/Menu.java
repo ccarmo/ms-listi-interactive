@@ -68,13 +68,24 @@ public class Menu {
                     System.out.println("Pix");
                     break;
                 case 4:
+                    TransactionService transactionService = new TransactionService(new StartTransactionImpl(new StatementFileRepository()));
                     System.out.print("\tValor: ");
                     BigDecimal valueTransaction = scanner.nextBigDecimal();
                     System.out.print("\tTipo: ");
                     scanner.nextLine();
                     String type = scanner.nextLine();
-                    printTransaction(accountNumber, valueTransaction, type);
-                    System.out.print("\tPagamento realizado");
+
+                    Transaction transaction =   new Transaction.Builder()
+                            .value(valueTransaction)
+                            .typeTransaction(type)
+                            .idAccount(accountNumber)
+                            .create();
+
+                    Transaction transactionReturn = transactionService.createTransaction(transaction);
+
+                    printedTransactionCreate(transactionReturn);
+
+
                     printSpaceLines();
                     break;
                 default:
@@ -135,18 +146,31 @@ public class Menu {
         System.out.print("Opção: ");
     }
 
-     private void printTransaction(String accountNumber, BigDecimal value, String type) {
+    private void printedTransactionCreate(Transaction transaction) {
+        String paymentOk = "Pagamento Realizado  ";
+        String dateTransaction = transaction.getDateTransaction();
+        String value = "Valor:    R$ " + transaction.getValue();
+        String typeTransaction = "Tipo: " + transaction.getTypeTransaction();
 
-        TransactionService transactionService = new TransactionService(new StartTransactionImpl(new StatementFileRepository()));
+        // Calcular a largura máxima para ajustar a formatação
+        int largura = paymentOk.length() + 2;
+        if (value.length() > largura) {
+            largura = value.length();
+        }
+        if (typeTransaction.length() > largura) {
+            largura = typeTransaction.length();
+        }
 
-        Transaction transaction =   new Transaction.Builder()
-                                        .value(value)
-                                        .typeTransaction(type)
-                                        .idAccount(accountNumber)
-                                        .create();
+        // Imprimir a interface
+        System.out.println("+" + " -".repeat(largura / 2) + " +");
+        System.out.println("|" + " ".repeat((largura - paymentOk.length()) / 2) + paymentOk + " ".repeat((largura - paymentOk.length()) / 2) + "|");
+        System.out.println("+" + " -".repeat(largura / 2) + " +");
 
-        transactionService.createTransaction(transaction);
+        System.out.println("|" + " ".repeat((largura - dateTransaction.length()) / 2) + dateTransaction + " ".repeat((largura - dateTransaction.length()) / 2) + "|");
+        System.out.println("|" + " ".repeat((largura - value.length()) / 2) + value + " ".repeat((largura - value.length()) / 2) + "|");
+        System.out.println("|" + " ".repeat((largura - typeTransaction.length()) / 2) + typeTransaction + " ".repeat((largura - typeTransaction.length()) / 2) + "|");
 
+        System.out.println("+" + " -".repeat(largura / 2) + " +");
     }
 
 

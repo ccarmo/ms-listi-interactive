@@ -2,6 +2,7 @@ package com.dev.clibank.domain.entities;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 
@@ -14,16 +15,20 @@ public class Transaction {
 
     private String typeTransaction;
 
-    private LocalDateTime dateTransaction;
+    private String dateTransaction;
+
+
 
 
 
     public Transaction(Builder transactionBuilder) {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         this.idTransaction    = UUID.randomUUID().toString();
         this.value            = transactionBuilder.value;
         this.idAccount        = transactionBuilder.idAccount;
         this.typeTransaction  = transactionBuilder.typeTransaction;
-        this.dateTransaction  = LocalDateTime.now();
+        this.dateTransaction  = localDateTime.format(formatter);
 
     }
 
@@ -65,16 +70,13 @@ public class Transaction {
 
     }
 
+
     public String getIdTransaction() {
         return idTransaction;
     }
 
     public BigDecimal getValue() {
         return value;
-    }
-
-    public void setValue(BigDecimal value) {
-        this.value = value;
     }
 
     public String getIdAccount() {
@@ -85,10 +87,6 @@ public class Transaction {
         return typeTransaction;
     }
 
-    public String getDateTransaction() {return this.getDateTransaction();}
-
-    public void setTypeTransaction(String typeTransaction) {
-        this.typeTransaction = typeTransaction;
-    }
+    public String getDateTransaction() {return this.dateTransaction;}
 
 }

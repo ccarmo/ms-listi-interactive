@@ -4,5 +4,5 @@ import com.dev.clibank.domain.entities.Transaction;
 
 public interface StartTransaction {
 
-    void createTransaction(Transaction transaction);
+    Transaction createTransaction(Transaction transaction);
 }
