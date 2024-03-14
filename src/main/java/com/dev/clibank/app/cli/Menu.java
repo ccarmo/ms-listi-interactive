@@ -1,5 +1,9 @@
-package com.dev.clibank.app.services;
+package com.dev.clibank.app.cli;
 
+import com.dev.clibank.app.services.AccountService;
+import com.dev.clibank.app.services.StatementService;
+import com.dev.clibank.app.services.TransactionService;
+import com.dev.clibank.app.services.UserService;
 import com.dev.clibank.app.usecases.impl.*;
 import com.dev.clibank.domain.entities.Account;
 import com.dev.clibank.domain.entities.Transaction;
@@ -32,7 +36,6 @@ public class Menu {
         System.out.println("\n");
         System.out.print("                                           \tConta: ");
         String value = scanner.nextLine();
-
         String accountNumber = value;
         Account account = accountService.getAccount(accountNumber).get();
         User user = userService.getUserService(account.getIdUser()).get();
@@ -65,14 +68,13 @@ public class Menu {
                     System.out.println("Pix");
                     break;
                 case 4:
-                    TransactionService transactionService = new TransactionService(new StartTransactionImpl(new StatementFileRepository()));
-
-                    Transaction transaction =   new Transaction.Builder()
-                                                .typeTransaction("CREDIT")
-                                                .value(BigDecimal.valueOf(1))
-                                                .idAccount(accountNumber)
-                                                .create();
-                    transactionService.createTransaction(transaction);
+                    System.out.print("\tValor: ");
+                    BigDecimal valueTransaction = scanner.nextBigDecimal();
+                    System.out.print("\tTipo: ");
+                    scanner.nextLine();
+                    String type = scanner.nextLine();
+                    printTransaction(accountNumber, valueTransaction, type);
+                    System.out.print("\tPagamento realizado");
                     printSpaceLines();
                     break;
                 default:
@@ -132,21 +134,22 @@ public class Menu {
 
         System.out.print("Opção: ");
     }
-    /**
-     private static List<Payment> printPayment() {
 
-        List<Payment> listValues = Collections.emptyList();
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("\tValor: ");
-        String value = scanner.nextLine();
+     private void printTransaction(String accountNumber, BigDecimal value, String type) {
 
-        valuesLogin.add(value);
-        System.out.print("                                           \tSenha: ");
-        valuesLogin.add(value);
+        TransactionService transactionService = new TransactionService(new StartTransactionImpl(new StatementFileRepository()));
+
+        Transaction transaction =   new Transaction.Builder()
+                                        .value(value)
+                                        .typeTransaction(type)
+                                        .idAccount(accountNumber)
+                                        .create();
+
+        transactionService.createTransaction(transaction);
 
     }
 
-    **/
+
 
 
 
