@@ -1,21 +1,16 @@
 package com.dev.clibank.infra.file;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.BufferedReader;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.math.BigDecimal;
+
 import java.util.List;
 import java.util.function.Predicate;
 
 import com.dev.clibank.domain.Dummy;
-import com.dev.clibank.domain.entities.Account;
-import com.dev.clibank.domain.entities.Card;
 import org.junit.jupiter.api.*;
 
-import com.dev.clibank.domain.entities.User;
+
 
 
 public class FileJsonManagerTest {
@@ -23,17 +18,17 @@ public class FileJsonManagerTest {
     private static final String TEST_FILE = "test.json";
 
     @BeforeEach
-    void setUp() {
+    public void setUp() {
         FileJsonManager.clearFileJson(TEST_FILE);
     }
 
     @AfterEach
-    void tearDown() {
+    public void tearDown() {
         FileJsonManager.clearFileJson(TEST_FILE);
     }
 
     @Test
-    void testSaveFileJsonAndGetFileListJson() {
+    public void testSaveFileJsonAndGetFileListJson() {
         // Testa salvar um objeto em um arquivo JSON e então recuperá-lo
 
         // Dados de teste
@@ -53,7 +48,7 @@ public class FileJsonManagerTest {
     }
 
     @Test
-    void testUpdatedFileJson() {
+    public void testUpdatedFileJson() {
         // Testa a atualização de um objeto em um arquivo JSON
 
         // Dados de teste
@@ -79,7 +74,7 @@ public class FileJsonManagerTest {
     }
 
     @Test
-    public void getFileArrayJsonToClass() throws FileNotFoundException {
+    public void testFileArrayJsonToClass() throws FileNotFoundException {
         Dummy dummy = new Dummy("Joao");
         Dummy dummy2 = new Dummy("Carlos");
         FileJsonManager.saveFileJson(List.of(dummy, dummy2), TEST_FILE);
@@ -90,7 +85,7 @@ public class FileJsonManagerTest {
 
 
     @Test
-    public void insertNewObject() throws FileNotFoundException {
+    public void testInsertNewObject() throws FileNotFoundException {
         Dummy dummy = new Dummy("Joao");
         FileJsonManager.saveFileJson(List.of(dummy), TEST_FILE);
         Dummy dummy2 = new Dummy("Carlos");

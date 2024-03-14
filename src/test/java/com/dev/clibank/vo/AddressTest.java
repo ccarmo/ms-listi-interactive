@@ -2,7 +2,6 @@ package com.dev.clibank.vo;
 
 
 import com.dev.clibank.exceptions.AddressNotValidException;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.dev.clibank.domain.vo.Address;

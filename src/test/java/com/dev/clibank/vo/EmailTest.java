@@ -10,35 +10,35 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class EmailTest {
 
     @Test
-    void testValidEmail() {
+    public void testValidEmail() {
         String validEmail = "example@example.com";
         Email email = new Email(validEmail);
         assertEquals(validEmail, email.getEmail());
     }
 
     @Test
-    void testInvalidEmail() {
+    public void testInvalidEmail() {
         String invalidEmail = "invalidemail";
         assertThrows(EmailNotValidException.class, () -> new Email(invalidEmail));
     }
 
     @Test
-    void testNullEmail() {
+    public void testNullEmail() {
         assertThrows(EmailNotValidException.class, () -> new Email(null));
     }
 
     @Test
-    void testEmptyEmail() {
+    public void testEmptyEmail() {
         assertThrows(EmailNotValidException.class, () -> new Email(""));
     }
 
     @Test
-    void testBlankEmail() {
+    public void testBlankEmail() {
         assertThrows(EmailNotValidException.class, () -> new Email("   "));
     }
 
     @Test
-    void testEqualsAndHashCode() {
+    public void testEqualsAndHashCode() {
         String emailStr1 = "example@example.com";
         String emailStr2 = "example@example.com";
         Email email1 = new Email(emailStr1);
