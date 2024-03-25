@@ -8,8 +8,9 @@ import java.util.UUID;
 
 public class User implements Serializable {
 
+
+    private String idUser;
     private String name;
-    private String id;
 
     /**
     private Address address;
@@ -17,15 +18,15 @@ public class User implements Serializable {
      **/
 
     public User (String name) {
-        this.id   = UUID.randomUUID().toString();
+        this.idUser   = UUID.randomUUID().toString();
         this.name = name;
     }
 
     public String getName() {
         return this.name;
     }
-    public String getId() {
-        return this.id;
+    public String getIdUser() {
+        return this.idUser;
     }
 
 

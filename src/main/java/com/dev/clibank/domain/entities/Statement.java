@@ -6,11 +6,11 @@ public class Statement {
 
     private String idStatement;
 
-    private Payment payment;
+    private Transaction transaction;
 
-    public Statement(Payment payment) {
+    public Statement(Transaction transaction) {
         this.idStatement = UUID.randomUUID().toString();
-        this.payment = payment;
+        this.transaction = transaction;
     }
 
     public String getIdStatement() {
@@ -21,11 +21,11 @@ public class Statement {
         this.idStatement = idStatement;
     }
 
-    public Payment getPayment() {
-        return payment;
+    public Transaction getPayment() {
+        return transaction;
     }
 
-    public void setPayment(Payment payment) {
-        this.payment = payment;
+    public void setPayment(Transaction transaction) {
+        this.transaction = transaction;
     }
 }

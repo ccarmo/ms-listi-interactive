@@ -1,6 +1,6 @@
 package com.dev.clibank;
 
-import com.dev.clibank.app.services.Menu;
+import com.dev.clibank.app.cli.Menu;
 
 /**
  * Hello world!

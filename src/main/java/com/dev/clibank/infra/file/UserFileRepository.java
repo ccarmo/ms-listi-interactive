@@ -13,7 +13,7 @@ public class UserFileRepository implements UserRepository {
     public Optional<User> getUser(String idUser) {
         List<User> userList = FileJsonManager.getFileListJson(USER_FILE_NAME,User.class);
         for (User user : userList) {
-            if (user.getId().equals(idUser)) {
+            if (user.getIdUser().equals(idUser)) {
                 return  Optional.of(user);
             }
         }

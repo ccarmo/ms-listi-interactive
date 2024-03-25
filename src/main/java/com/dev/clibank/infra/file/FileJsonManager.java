@@ -60,7 +60,6 @@ public class FileJsonManager {
             FileWriter fileWriter = new FileWriter(concatPath);
             fileWriter.write(stringJson);
             fileWriter.close();
-            System.out.println("Success saved file!");
         } catch (IOException e) {
             System.out.println("Error saved file" + e.getMessage());
             e.printStackTrace();
