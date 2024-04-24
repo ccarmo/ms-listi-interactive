@@ -6,16 +6,18 @@ import com.dev.clibank.domain.entities.User;
 import com.dev.clibank.domain.repository.AccountRepository;
 import com.dev.clibank.exceptions.AccountNotFoundException;
 import com.dev.clibank.exceptions.UserNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class GetAccountImpl implements GetAccount {
 
-    private final AccountRepository accountRepository;
+    @Autowired
+    AccountRepository accountRepository;
 
-    public GetAccountImpl(AccountRepository accountRepository) {
-        this.accountRepository = accountRepository;
-    }
+
     @Override
     public Optional<Account> getAccount(String idAccount) {
         Optional<Account> account = accountRepository.getAccountNumber(idAccount);

@@ -3,18 +3,16 @@ package com.dev.clibank.app.usecases.impl;
 import com.dev.clibank.app.usecases.GetStatement;
 import com.dev.clibank.domain.entities.Statement;
 import com.dev.clibank.domain.repository.StatementRepository;
-import com.dev.clibank.infra.file.StatementFileRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class GetStatementImpl implements GetStatement {
 
-    private StatementRepository statementRepository= new StatementFileRepository();
-
-    public GetStatementImpl(StatementRepository statementRepository) {
-        this.statementRepository = statementRepository;
-    }
-
+    @Autowired
+    StatementRepository statementRepository;
 
     @Override
     public List<Statement> getStatement(String idAccount) {

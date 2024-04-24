@@ -12,14 +12,24 @@ public class User implements Serializable {
     private String idUser;
     private String name;
 
+    private Email email;
+
+    public Email getEmail() {
+        return email;
+    }
+
+    public void setEmail(Email email) {
+        this.email = email;
+    }
+
     /**
     private Address address;
-    private Email email;
      **/
 
-    public User (String name) {
+    public User (String name, Email email) {
         this.idUser   = UUID.randomUUID().toString();
-        this.name = name;
+        this.name     = name;
+        this.email    = email;
     }
 
     public String getName() {

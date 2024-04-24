@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface UserRepository {
 
     Optional<User> getUser(String idUser);
+
+    Optional<User> createUser(String name);
 }

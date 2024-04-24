@@ -1,30 +1,35 @@
 package com.dev.clibank.app.usecases.impl;
 
+import com.dev.clibank.app.rest.dto.UserDTO;
 import com.dev.clibank.app.usecases.GetUser;
 import com.dev.clibank.domain.entities.Account;
 import com.dev.clibank.domain.entities.User;
 import com.dev.clibank.domain.repository.UserRepository;
 import com.dev.clibank.exceptions.AccountNotFoundException;
 import com.dev.clibank.exceptions.UserNotFoundException;
+import com.dev.clibank.infra.db.mapper.UserMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class GetUserImpl implements GetUser {
 
-    private final UserRepository userRepository;
+    @Autowired
+    UserRepository userRepository;
 
-    public GetUserImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
+    @Autowired
+    UserMapper userMapper;
 
     @Override
-    public Optional<User> getUser(String idUser) {
+    public Optional<UserDTO> getUser(String idUser) {
         Optional<User> user = userRepository.getUser(idUser);
+        UserDTO userDTO = userMapper.userToUserDTO(user.get());
         if(user.isEmpty()) {
             throw new UserNotFoundException("User not found for number: " + idUser);
         } else {
-            return user;
+            return Optional.of(userDTO);
         }
     }
 }
