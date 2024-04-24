@@ -21,8 +21,8 @@ public class UserRepositoryDb implements UserRepository {
     UserMapper userMapper;
 
     @Override
-    public Optional<User> getUser(String idUser) {
-        Optional<UserModel> userModelOptional = userRepositoryJpa.findById(idUser);
+    public Optional<User> getUser(String name) {
+        Optional<UserModel> userModelOptional = userRepositoryJpa.findByName(name);
         User user = userMapper.userModelToUser(userModelOptional.get());
         return Optional.of(user);
     }
