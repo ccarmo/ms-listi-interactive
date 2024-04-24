@@ -11,7 +11,7 @@ import java.math.BigDecimal;
 public class TransactionModel {
 
     @Id
-    private String id;
+    private String idTransaction;
     private BigDecimal valueTransaction;
 
     private String idAccount;
