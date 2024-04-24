@@ -2,9 +2,9 @@ package com.dev.clibank.infra.db.model;
 
 
 
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
-import javax.persistence.Entity;
 import java.math.BigDecimal;
 
 @Entity

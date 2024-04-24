@@ -1,8 +1,8 @@
 package com.dev.clibank.infra.db.model;
 
-import javax.persistence.Id;
 
-import javax.persistence.Entity;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class UserModel {
