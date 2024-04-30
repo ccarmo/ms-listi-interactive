@@ -1,6 +1,6 @@
 package com.dev.clibank.infra.db.mapper;
 
-import com.dev.clibank.app.rest.dto.AccountDTO;
+
 import com.dev.clibank.app.rest.records.AccountRecord;
 import com.dev.clibank.domain.entities.Account;
 import com.dev.clibank.infra.db.model.AccountModel;

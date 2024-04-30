@@ -9,7 +9,7 @@ import java.util.UUID;
 public class Transaction {
 
     private String idTransaction;
-    private BigDecimal value;
+    private BigDecimal valueTransaction;
 
     private String idAccount;
 
@@ -25,7 +25,8 @@ public class Transaction {
         LocalDateTime localDateTime = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         this.idTransaction    = UUID.randomUUID().toString();
-        this.value            = transactionBuilder.value;
+        this.valueTransaction = transactionBuilder.value;
+        System.out.println("Valor no builder" + valueTransaction);
         this.idAccount        = transactionBuilder.idAccount;
         this.typeTransaction  = transactionBuilder.typeTransaction;
         this.dateTransaction  = localDateTime.format(formatter);
@@ -65,6 +66,7 @@ public class Transaction {
 
 
         public Transaction create() {
+
             return new Transaction(this);
         }
 
@@ -75,8 +77,8 @@ public class Transaction {
         return idTransaction;
     }
 
-    public BigDecimal getValue() {
-        return value;
+    public BigDecimal getValueTransaction() {
+        return valueTransaction;
     }
 
     public String getIdAccount() {

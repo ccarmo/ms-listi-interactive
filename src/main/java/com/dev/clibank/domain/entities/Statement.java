@@ -9,7 +9,6 @@ public class Statement {
     private Transaction transaction;
 
     public Statement(Transaction transaction) {
-        this.idStatement = UUID.randomUUID().toString();
         this.transaction = transaction;
     }
 

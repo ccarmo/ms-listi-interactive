@@ -1,6 +1,5 @@
 package com.dev.clibank.infra.db.mapper;
 
-import com.dev.clibank.app.rest.dto.UserDTO;
 import com.dev.clibank.app.rest.records.UserRecord;
 import com.dev.clibank.domain.entities.User;
 import com.dev.clibank.domain.vo.Email;
