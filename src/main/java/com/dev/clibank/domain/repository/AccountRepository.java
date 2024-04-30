@@ -6,5 +6,8 @@ import java.util.Optional;
 
 public interface AccountRepository {
     Optional<Account> getAccountNumber(String accountNumber);
-    void updatedAccount(Account account);
+    Optional<Account> updatedAccount(Account account);
+
+    Optional<Account> createAccount(Account account);
+
 }

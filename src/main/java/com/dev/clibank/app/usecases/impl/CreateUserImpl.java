@@ -1,6 +1,6 @@
 package com.dev.clibank.app.usecases.impl;
 
-import com.dev.clibank.app.rest.dto.UserDTO;
+import com.dev.clibank.app.rest.records.UserRecord;
 import com.dev.clibank.app.usecases.CreateUser;
 import com.dev.clibank.domain.entities.User;
 import com.dev.clibank.domain.repository.UserRepository;
@@ -19,7 +19,7 @@ public class CreateUserImpl implements CreateUser {
     UserMapper userMapper;
 
     @Override
-    public Optional<UserDTO> createUser(String name) {
+    public Optional<UserRecord> createUser(String name) {
         Optional<User> user = userRepository.createUser(name);
         return  Optional.of(userMapper.userToUserDTO(user.get()));
     }

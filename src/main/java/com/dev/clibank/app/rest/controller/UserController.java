@@ -1,7 +1,7 @@
 package com.dev.clibank.app.rest.controller;
 
 
-import com.dev.clibank.app.rest.dto.UserDTO;
+import com.dev.clibank.app.rest.records.UserRecord;
 import com.dev.clibank.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +17,14 @@ public class UserController {
     UserService userService;
 
     @PostMapping
-    public ResponseEntity<UserDTO> createUser(@RequestParam("name")  String name) {
-        UserDTO userDTO = userService.createUser(name);
+    public ResponseEntity<UserRecord> createUser(@RequestParam("name")  String name) {
+        UserRecord userDTO = userService.createUser(name);
         return ResponseEntity.ok(userDTO);
     }
 
     @GetMapping
-    public ResponseEntity<UserDTO> getUser(@RequestParam("name") String name) {
-        Optional<UserDTO> userDTO = userService.getUserService(name);
+    public ResponseEntity<UserRecord> getUser(@RequestParam("name") String name) {
+        Optional<UserRecord> userDTO = userService.getUserService(name);
         return ResponseEntity.ok(userDTO.get());
     }
 }
