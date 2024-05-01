@@ -3,6 +3,7 @@ package com.dev.clibank.app.usecases.impl;
 import com.dev.clibank.app.rest.records.AccountRecord;
 import com.dev.clibank.app.usecases.CreateAccount;
 import com.dev.clibank.domain.entities.Account;
+import com.dev.clibank.domain.entities.TypeAccount;
 import com.dev.clibank.domain.repository.AccountRepository;
 import com.dev.clibank.infra.db.mapper.AccountMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class CreateAccountImpl implements CreateAccount {
 
     @Override
     public Optional<AccountRecord> createAccount(String idUser) {
-        Account account = new Account("07103", BigDecimal.ZERO, idUser);
+        Account account = new Account(BigDecimal.ZERO, TypeAccount.CURRENT_ACCOUNT ,idUser);
         Optional<Account> accountCreated = accountRepository.createAccount(account);
         AccountRecord accountRecord = accountMapper.accountToAccountRecord(accountCreated.get());
         return Optional.of(accountRecord);

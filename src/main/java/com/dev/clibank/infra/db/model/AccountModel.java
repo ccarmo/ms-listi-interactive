@@ -2,6 +2,7 @@ package com.dev.clibank.infra.db.model;
 
 
 
+import com.dev.clibank.domain.entities.TypeAccount;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -17,6 +18,12 @@ public class AccountModel {
     private String idUser;
 
     private String accountNumber;
+
+    private String numberAgency;
+
+    private  BigDecimal limitAccount;
+
+    private TypeAccount typeAccount;
 
     private BigDecimal balance;
 
@@ -42,6 +49,30 @@ public class AccountModel {
 
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    public String getNumberAgency() {
+        return numberAgency;
+    }
+
+    public void setNumberAgency(String numberAgency) {
+        this.numberAgency = numberAgency;
+    }
+
+    public BigDecimal getLimitAccount() {
+        return limitAccount;
+    }
+
+    public void setLimitAccount(BigDecimal limitAccount) {
+        this.limitAccount = limitAccount;
+    }
+
+    public TypeAccount getTypeAccount() {
+        return typeAccount;
+    }
+
+    public void setTypeAccount(TypeAccount typeAccount) {
+        this.typeAccount = typeAccount;
     }
 
     public BigDecimal getBalance() {
