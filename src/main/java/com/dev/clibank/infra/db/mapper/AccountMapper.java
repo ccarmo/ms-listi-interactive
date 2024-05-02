@@ -30,7 +30,7 @@ public interface AccountMapper {
     }
 
     @Named("mapTypeAccountToString")
-    default String mapEmailToString(TypeAccount typeAccount) {
+    default String mapTypeAccountToString(TypeAccount typeAccount) {
         return typeAccount.toString();
     }
 }

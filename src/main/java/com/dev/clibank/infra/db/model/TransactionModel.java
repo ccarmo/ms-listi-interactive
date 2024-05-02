@@ -18,7 +18,7 @@ public class TransactionModel {
 
     private String idAccount;
 
-    private TypeTransaction typeTransaction;
+    private String typeTransaction;
 
     private String dateTransaction;
 
@@ -46,11 +46,11 @@ public class TransactionModel {
         this.idAccount = idAccount;
     }
 
-    public TypeTransaction getTypeTransaction() {
+    public String getTypeTransaction() {
         return typeTransaction;
     }
 
-    public void setTypeTransaction(TypeTransaction typeTransaction) {
+    public void setTypeTransaction(String typeTransaction) {
         this.typeTransaction = typeTransaction;
     }
 
