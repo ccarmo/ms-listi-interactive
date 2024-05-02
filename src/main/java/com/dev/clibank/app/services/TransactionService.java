@@ -18,7 +18,7 @@ public class TransactionService {
     public TransactionRecord createTransaction(TransactionRecord transactionRecord) {
 
         Transaction transaction =   new Transaction.Builder()
-                .typeTransaction("CREDIT")
+                .typeTransaction(transactionRecord.typeTransaction())
                 .value(transactionRecord.valueTransaction())
                 .idAccount(transactionRecord.accountNumber())
                 .create();

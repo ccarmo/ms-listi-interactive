@@ -23,7 +23,7 @@ public class AccountModel {
 
     private  BigDecimal limitAccount;
 
-    private TypeAccount typeAccount;
+    private String typeAccount;
 
     private BigDecimal balance;
 
@@ -67,11 +67,11 @@ public class AccountModel {
         this.limitAccount = limitAccount;
     }
 
-    public TypeAccount getTypeAccount() {
+    public String getTypeAccount() {
         return typeAccount;
     }
 
-    public void setTypeAccount(TypeAccount typeAccount) {
+    public void setTypeAccount(String typeAccount) {
         this.typeAccount = typeAccount;
     }
 

@@ -1,6 +1,7 @@
 package com.dev.clibank.infra.db.model;
 
 
+import com.dev.clibank.domain.entities.TypeTransaction;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -17,7 +18,7 @@ public class TransactionModel {
 
     private String idAccount;
 
-    private String typeTransaction;
+    private TypeTransaction typeTransaction;
 
     private String dateTransaction;
 
@@ -45,11 +46,11 @@ public class TransactionModel {
         this.idAccount = idAccount;
     }
 
-    public String getTypeTransaction() {
+    public TypeTransaction getTypeTransaction() {
         return typeTransaction;
     }
 
-    public void setTypeTransaction(String typeTransaction) {
+    public void setTypeTransaction(TypeTransaction typeTransaction) {
         this.typeTransaction = typeTransaction;
     }
 

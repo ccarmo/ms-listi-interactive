@@ -1,5 +1,6 @@
 package com.dev.clibank.domain.entities;
 
+import java.lang.reflect.Type;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -13,7 +14,7 @@ public class Transaction {
 
     private String idAccount;
 
-    private String typeTransaction;
+    private TypeTransaction typeTransaction;
 
     private String dateTransaction;
 
@@ -39,7 +40,7 @@ public class Transaction {
 
         private String idAccount;
 
-        private String typeTransaction;
+        private TypeTransaction typeTransaction;
 
 
 
@@ -59,7 +60,7 @@ public class Transaction {
             return this;
         }
 
-        public Builder typeTransaction(String typeTransaction) {
+        public Builder typeTransaction(TypeTransaction typeTransaction) {
             this.typeTransaction = typeTransaction;
             return this;
         }
@@ -85,7 +86,7 @@ public class Transaction {
         return idAccount;
     }
 
-    public String getTypeTransaction() {
+    public TypeTransaction getTypeTransaction() {
         return typeTransaction;
     }
 

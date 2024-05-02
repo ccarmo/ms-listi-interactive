@@ -19,13 +19,13 @@ public class AccountController {
     AccountService accountService;
 
     @PostMapping
-    public ResponseEntity<AccountRecord> createUser(@RequestParam("idUser") String idUser) {
+    public ResponseEntity<AccountRecord> createAccount(@RequestParam("idUser") String idUser) {
         Optional<AccountRecord> accountRecord = accountService.createAccount(idUser);
         return ResponseEntity.ok(accountRecord.get());
     }
 
     @GetMapping
-    public ResponseEntity<AccountRecord> getUser(@RequestParam("accountNumber") String accountNumber) {
+    public ResponseEntity<AccountRecord> getAccount(@RequestParam("accountNumber") String accountNumber) {
         Optional<AccountRecord> accountRecord = accountService.getAccount(accountNumber);
         return ResponseEntity.ok(accountRecord.get());
     }

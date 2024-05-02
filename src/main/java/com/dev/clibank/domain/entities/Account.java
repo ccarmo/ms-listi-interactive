@@ -1,10 +1,6 @@
 package com.dev.clibank.domain.entities;
 
 
-import com.dev.clibank.domain.vo.Address;
-import org.apache.logging.log4j.util.Strings;
-import org.aspectj.bridge.Message;
-
 import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
