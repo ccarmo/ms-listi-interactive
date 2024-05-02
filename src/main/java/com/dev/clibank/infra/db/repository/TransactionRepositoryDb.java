@@ -8,6 +8,10 @@ import com.dev.clibank.infra.db.repository.jpa.TransactionRepositoryJpa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @Service
 public class TransactionRepositoryDb implements TransactionRepository {
 
@@ -20,5 +24,17 @@ public class TransactionRepositoryDb implements TransactionRepository {
         TransactionModel transactionModel = transactionMapper.transactionToTransactionModel(transaction);
         System.out.println(transactionModel.toString());
         transactionRepositoryJpa.save(transactionModel);
+    }
+
+    @Override
+    public List<Transaction> listTransaction(String accountNumber) {
+        List<TransactionModel> transactionModelList = transactionRepositoryJpa.findAllByAccountNumber(accountNumber);
+        List<Transaction> transactionList =  new ArrayList<>();
+
+        for (TransactionModel transactionModel: transactionModelList) {
+            Transaction transaction = transactionMapper.transactionModelToTransaction(transactionModel);
+            transactionList.add(transaction);
+        }
+        return transactionList;
     }
 }

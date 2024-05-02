@@ -29,13 +29,13 @@ public class StartTransactionImpl implements StartTransaction {
 
     @Override
     public TransactionRecord createTransaction(Transaction transaction) {
-        Optional<Account> account = accountRepository.getAccountNumber(transaction.getIdAccount());
+        Optional<Account> account = accountRepository.getAccountNumber(transaction.getAccountNumber());
         BigDecimal actualBalanceAccount = account.get().getBalance();
         BigDecimal newBalance = actualBalanceAccount.subtract(transaction.getValueTransaction());
         account.get().setBalance(newBalance);
         accountRepository.updatedAccount(account.get());
         transactionRepository.savedTransaction(transaction);
-        TransactionRecord transactionRecord = transactionMapper.transactionToTransactionMapper(transaction);
+        TransactionRecord transactionRecord = transactionMapper.transactionToTransactionRecord(transaction);
         return transactionRecord;
     }
 }

@@ -22,4 +22,10 @@ public class TransactionController {
         transactionService.createTransaction(transactionRecord);
         return ResponseEntity.ok(transactionRecord);
     }
+
+    @GetMapping(produces = "text/csv")
+    public ResponseEntity<?> generateCSV(@RequestParam("accountNumber") String accountNumber) {
+        return ResponseEntity.ok().header("Content-Disposition", "attachment; filename=dados.csv").body(transactionService.createCsv(accountNumber).get().toByteArray());
+    }
+
 }

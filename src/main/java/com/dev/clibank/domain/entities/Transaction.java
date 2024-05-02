@@ -12,7 +12,8 @@ public class Transaction {
     private String idTransaction;
     private BigDecimal valueTransaction;
 
-    private String idAccount;
+
+    private String accountNumber;
 
     private TypeTransaction typeTransaction;
 
@@ -21,57 +22,63 @@ public class Transaction {
 
 
 
-
-    public Transaction(Builder transactionBuilder) {
-        LocalDateTime localDateTime = LocalDateTime.now();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        this.idTransaction    = UUID.randomUUID().toString();
+    private Transaction(TransactionBuilder transactionBuilder) {
         this.valueTransaction = transactionBuilder.value;
-        System.out.println("Valor no builder" + valueTransaction);
-        this.idAccount        = transactionBuilder.idAccount;
+        this.accountNumber        = transactionBuilder.accountNumber;
         this.typeTransaction  = transactionBuilder.typeTransaction;
-        this.dateTransaction  = localDateTime.format(formatter);
-
+        if (transactionBuilder.dateTransaction != null) {
+            this.dateTransaction = transactionBuilder.dateTransaction;
+            this.idTransaction    = UUID.randomUUID().toString();
+        }
     }
 
-    public static class Builder {
+    public static TransactionBuilder builder() {
+        return new TransactionBuilder();
+    }
 
+    public static class TransactionBuilder {
         private BigDecimal value;
 
-        private String idAccount;
+        private String accountNumber;
 
         private TypeTransaction typeTransaction;
+        private String dateTransaction;
 
 
-
-        public Builder() {
-
-
-
-        }
-
-        public Builder value(BigDecimal value) {
+        public TransactionBuilder value(BigDecimal value) {
             this.value = value;
             return this;
         }
 
-        public Builder idAccount(String idAccount) {
-            this.idAccount = idAccount;
+        public TransactionBuilder accountNumber(String accountNumber) {
+            this.accountNumber = accountNumber;
             return this;
         }
 
-        public Builder typeTransaction(TypeTransaction typeTransaction) {
+        public TransactionBuilder typeTransaction(TypeTransaction typeTransaction) {
             this.typeTransaction = typeTransaction;
             return this;
         }
 
+        public TransactionBuilder withCreationDate() {
+            LocalDateTime localDateTime = LocalDateTime.now();
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+            this.dateTransaction = localDateTime.format(formatter);
+            return this;
+        }
 
-        public Transaction create() {
 
+
+        public Transaction build() {
             return new Transaction(this);
         }
 
     }
+
+
+
+
+
 
 
     public String getIdTransaction() {
@@ -82,8 +89,8 @@ public class Transaction {
         return valueTransaction;
     }
 
-    public String getIdAccount() {
-        return idAccount;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
     public TypeTransaction getTypeTransaction() {
@@ -92,4 +99,18 @@ public class Transaction {
 
     public String getDateTransaction() {return this.dateTransaction;}
 
+    public void setTypeTransaction(TypeTransaction typeTransaction) {
+        this.typeTransaction = typeTransaction;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "idTransaction='" + idTransaction + '\'' +
+                ", valueTransaction=" + valueTransaction +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", typeTransaction=" + typeTransaction +
+                ", dateTransaction='" + dateTransaction + '\'' +
+                '}';
+    }
 }

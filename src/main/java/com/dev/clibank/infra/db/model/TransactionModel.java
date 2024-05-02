@@ -16,7 +16,7 @@ public class TransactionModel {
     private String idTransaction;
     private BigDecimal valueTransaction;
 
-    private String idAccount;
+    private String accountNumber;
 
     private String typeTransaction;
 
@@ -38,12 +38,12 @@ public class TransactionModel {
         this.valueTransaction = valueTransaction;
     }
 
-    public String getIdAccount() {
-        return idAccount;
+    public String getAccountNumber() {
+        return accountNumber;
     }
 
-    public void setIdAccount(String idAccount) {
-        this.idAccount = idAccount;
+    public void setAccountNumber(String accountNumber) {
+        this.accountNumber = accountNumber;
     }
 
     public String getTypeTransaction() {
@@ -67,7 +67,7 @@ public class TransactionModel {
         return "TransactionModel{" +
                 "idTransaction='" + idTransaction + '\'' +
                 ", valueTransaction=" + valueTransaction +
-                ", idAccount='" + idAccount + '\'' +
+                ", accountNumber='" + accountNumber + '\'' +
                 ", typeTransaction='" + typeTransaction + '\'' +
                 ", dateTransaction='" + dateTransaction + '\'' +
                 '}';
