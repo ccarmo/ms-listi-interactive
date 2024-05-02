@@ -22,10 +22,10 @@ public class CreateAccountImpl implements CreateAccount {
     AccountMapper accountMapper;
 
     @Override
-    public Optional<AccountRecord> createAccount(String idUser) {
-        Account account = new Account(BigDecimal.ZERO, TypeAccount.CURRENT_ACCOUNT ,idUser);
+    public Optional<AccountRecord> createAccount(AccountRecord accountRecord) {
+        Account account = new Account(accountRecord.typeAccount(),accountRecord.idUser());
         Optional<Account> accountCreated = accountRepository.createAccount(account);
-        AccountRecord accountRecord = accountMapper.accountToAccountRecord(accountCreated.get());
-        return Optional.of(accountRecord);
+        AccountRecord accountRecordMapepr = accountMapper.accountToAccountRecord(accountCreated.get());
+        return Optional.of(accountRecordMapepr);
     }
 }

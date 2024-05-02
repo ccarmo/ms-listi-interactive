@@ -23,7 +23,7 @@ public class Account {
 
     private BigDecimal balance;
 
-    public Account(BigDecimal balance, TypeAccount typeAccount, String idUser) {
+    public Account(TypeAccount typeAccount, String idUser) {
         StringBuilder stringBuilder = new StringBuilder().append(idUser).append(typeAccount);
 
         this.idAccount   = UUID.randomUUID().toString();
@@ -32,7 +32,7 @@ public class Account {
         this.numberAgency = "0001";
         this.limitAccount = BigDecimal.valueOf(100);
         this.typeAccount = typeAccount;
-        this.balance = balance;
+        this.balance = BigDecimal.ZERO;
     }
 
     private Optional<String> createNumberAccount(String identifier) {

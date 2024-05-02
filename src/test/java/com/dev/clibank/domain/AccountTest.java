@@ -18,7 +18,7 @@ public class AccountTest {
         TypeAccount typeAccount = TypeAccount.CURRENT_ACCOUNT;
         String idUser = "user123";
 
-        Account account = new Account(balance, typeAccount, idUser);
+        Account account = new Account(typeAccount, idUser);
 
         assertNotNull(account);
         assertEquals(numberAgency, account.getNumberAgency());

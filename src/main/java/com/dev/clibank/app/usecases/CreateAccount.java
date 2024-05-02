@@ -6,5 +6,5 @@ import java.util.Optional;
 
 public interface CreateAccount {
 
-    Optional<AccountRecord> createAccount(String idUser);
+    Optional<AccountRecord> createAccount(AccountRecord accountRecord);
 }

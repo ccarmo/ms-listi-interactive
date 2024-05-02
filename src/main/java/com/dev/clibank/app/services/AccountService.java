@@ -31,8 +31,8 @@ public class AccountService {
         }
     }
 
-    public Optional<AccountRecord> createAccount(String idUser) {
-        Optional<AccountRecord> accountRecord = createAccountService.createAccount(idUser);
+    public Optional<AccountRecord> createAccount(AccountRecord accountController) {
+        Optional<AccountRecord> accountRecord = createAccountService.createAccount(accountController);
         return accountRecord;
     }
 }
