@@ -24,7 +24,5 @@ RUN ./mvnw clean package
 # Expor a porta 8080 para comunicação interna do contêiner
 EXPOSE 8080
 
-# Define uma variável de ambiente para a porta da aplicação
-ENV PORT_APP=8082
 # Comando para iniciar a aplicação Spring Boot quando o contêiner for iniciado
-CMD ["java", "-jar", "target/clibank-1.0.0.jar","--server.port=${PORT_APP}"]
+CMD ["java", "-jar", "target/clibank-1.0.0.jar"]
