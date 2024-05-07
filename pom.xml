@@ -12,7 +12,7 @@
 
     <groupId>com.dev.clibank</groupId>
     <artifactId>clibank</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0.0</version>
 
     <properties>
         <compiler-plugin.version>3.12.1</compiler-plugin.version>
