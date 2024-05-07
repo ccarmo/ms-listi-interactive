@@ -25,4 +25,4 @@ RUN ./mvnw clean package
 EXPOSE 8080
 
 # Comando para iniciar a aplicação Spring Boot quando o contêiner for iniciado
-CMD ["java", "-jar", "target/clibank-1.0.0.jar"]
+CMD ["java", "-jar", "target/clibank-1.0.0.jar", "--server.port=${PORT}"]
