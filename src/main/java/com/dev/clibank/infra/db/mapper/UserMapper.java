@@ -28,6 +28,7 @@ public interface UserMapper {
     UserRecord userToUserDTO(User user);
 
 
+
     @Named("mapStringToEmail")
     default Email mapStringToEmail(String email) {
         return new Email(email);

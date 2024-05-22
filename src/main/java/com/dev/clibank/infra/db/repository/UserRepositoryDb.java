@@ -1,5 +1,6 @@
 package com.dev.clibank.infra.db.repository;
 
+import com.dev.clibank.app.rest.records.RegisterUserRecord;
 import com.dev.clibank.domain.entities.User;
 import com.dev.clibank.domain.repository.UserRepository;
 import com.dev.clibank.domain.vo.Email;
@@ -28,11 +29,18 @@ public class UserRepositoryDb implements UserRepository {
     }
 
     @Override
-    public Optional<User> createUser(String name) {
-        Email email = new Email("teste@teste.com");
-        User user = new User(name, email);
-        UserModel userModel = userMapper.userToUserModel(user);
-        userRepositoryJpa.save(userModel);
+    public Optional<User> getUsername(String email) {
+        Optional<UserModel> userModelOptional = userRepositoryJpa.findByEmail(email);
+        User user = userMapper.userModelToUser(userModelOptional.get());
         return Optional.of(user);
+    }
+
+    @Override
+    public Optional<User> createUser(RegisterUserRecord user) {
+        Email email = new Email(user.email());
+        User userCreated = new User(user.name(), email, user.password());
+        UserModel userModel = userMapper.userToUserModel(userCreated);
+        userRepositoryJpa.save(userModel);
+        return Optional.of(userCreated);
     }
 }

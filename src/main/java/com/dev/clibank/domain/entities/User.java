@@ -14,17 +14,21 @@ public class User implements Serializable {
 
     private Email email;
 
+    private String password;
+
 
 
     /**
     private Address address;
      **/
 
-    public User (String name, Email email) {
+    public User (String name, Email email, String password) {
         this.idUser   = UUID.randomUUID().toString();
         this.name     = name;
         this.email    = email;
+        this.password = password;
     }
+
 
     public String getName() {
         return this.name;
@@ -48,5 +52,13 @@ public class User implements Serializable {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

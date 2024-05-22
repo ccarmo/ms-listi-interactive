@@ -3,8 +3,11 @@ package com.dev.clibank.app.rest.controller;
 
 import com.dev.clibank.app.rest.records.UserRecord;
 import com.dev.clibank.app.services.UserService;
+import com.dev.clibank.infra.db.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -13,18 +16,11 @@ import java.util.Optional;
 @RequestMapping("/users")
 public class UserController {
 
-    @Autowired
-    UserService userService;
-
-    @PostMapping
-    public ResponseEntity<UserRecord> createUser(@RequestParam("name")  String name) {
-        UserRecord userDTO = userService.createUser(name);
-        return ResponseEntity.ok(userDTO);
+    @GetMapping("/me")
+    public ResponseEntity<Object> authenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return ResponseEntity.ok(authentication.getPrincipal());
     }
 
-    @GetMapping
-    public ResponseEntity<UserRecord> getUser(@RequestParam("name") String name) {
-        Optional<UserRecord> userDTO = userService.getUserService(name);
-        return ResponseEntity.ok(userDTO.get());
-    }
+
 }

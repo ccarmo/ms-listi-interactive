@@ -27,8 +27,4 @@ public class UserService {
         }
     }
 
-    public UserRecord createUser(String name) {
-        Optional<UserRecord> userRecord = createUserService.createUser(name);
-        return userRecord.get();
-    }
 }

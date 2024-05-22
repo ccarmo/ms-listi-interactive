@@ -1,11 +1,20 @@
 package com.dev.clibank.infra.db.model;
 
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
 
 @Entity
-public class UserModel {
+public class UserModel implements UserDetails {
 
     private static final String TABLE_NAME_USER = "users";
 
@@ -15,13 +24,18 @@ public class UserModel {
 
     private String email;
 
+    private String password;
 
-    public String getId() {
-        return id;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
@@ -32,12 +46,45 @@ public class UserModel {
         this.name = name;
     }
 
+    public String getId() {
+        return id;
+    }
 
-    public String getEmail() {
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
