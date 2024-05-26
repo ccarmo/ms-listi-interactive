@@ -1,5 +1,6 @@
 package com.dev.clibank.infra.db.mapper;
 
+import com.dev.clibank.app.rest.records.UserAuthRecord;
 import com.dev.clibank.app.rest.records.UserRecord;
 import com.dev.clibank.domain.entities.User;
 import com.dev.clibank.domain.vo.Email;
@@ -26,6 +27,12 @@ public interface UserMapper {
     @Mapping(source = "user.name", target = "name")
     @Mapping(source = "user.email", target = "email", qualifiedByName = "mapEmailToString")
     UserRecord userToUserDTO(User user);
+
+    @Mapping(source = "userModel.name", target = "name")
+    @Mapping(source = "userModel.email", target = "email")
+    @Mapping(source = "userModel.username", target = "username")
+    UserAuthRecord userModelToUserAuth(UserModel userModel);
+
 
 
 

@@ -5,5 +5,5 @@ import jakarta.validation.constraints.NotBlank;
 
 import java.math.BigDecimal;
 
-public record AccountRecord(@NotBlank TypeAccount typeAccount, @NotBlank String idUser) {
+public record AccountRecord(@NotBlank TypeAccount typeAccount) {
 }
